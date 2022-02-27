@@ -51,3 +51,9 @@ rm -rf app
 # copy your app over
 cp -R ../my-old-remix-app/app app
 ```
+# Prisma
+
+To open a web view of your prisma database
+```
+npx prisma studio
+```
