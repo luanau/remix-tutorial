@@ -8,7 +8,7 @@ import {
 
 import { db } from "~/utils/db.server";
 import stylesUrl from "~/styles/login.css";
-import { createUserSession, login } from "~/utils/session.server";
+import { createUserSession, login, register } from "~/utils/session.server";
 
 export const links: LinksFunction = () => {
   return [{ rel: "stylesheet", href: stylesUrl }];
@@ -97,11 +97,9 @@ export const action: ActionFunction = async ({
         });
       }
       // create the user
+      let user = await register({username, password});
       // create their session and redirect to /jokes
-      return badRequest({
-        fields,
-        formError: "Not implemented",
-      });
+      return createUserSession(user.id, redirectTo)
     }
     default: {
       return badRequest({
