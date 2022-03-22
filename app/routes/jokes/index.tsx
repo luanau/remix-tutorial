@@ -7,6 +7,7 @@ import { db } from "~/utils/db.server";
 type LoaderData = { randomJoke: Joke };
 
 export const loader: LoaderFunction = async () => {
+  
   const count = await db.joke.count();
   const randomRowNumber = Math.floor(Math.random() * count);
   const [randomJoke] = await db.joke.findMany({
@@ -27,6 +28,14 @@ export default function JokesIndexRoute() {
       <Link to={data.randomJoke.id}>
         "{data.randomJoke.name}" Permalink
       </Link>
+    </div>
+  );
+}
+
+export function ErrorBoundary() {
+  return (
+    <div className="error-container">
+      I did a whoopsies.
     </div>
   );
 }

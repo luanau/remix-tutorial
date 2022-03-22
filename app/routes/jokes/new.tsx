@@ -34,6 +34,7 @@ const badRequest = (data: ActionData) =>
 export const action: ActionFunction = async ({
   request,
 }) => {
+  
   let userId = await requireUserId(request)
   if (!userId) {
     return redirect("/login?redirtectTo=/jokes/new")
@@ -131,6 +132,14 @@ export default function NewJokeRoute() {
           </button>
         </div>
       </form>
+    </div>
+  );
+}
+
+export function ErrorBoundary() {
+  return (
+    <div className="error-container">
+      Something unexpected went wrong. Sorry about that.
     </div>
   );
 }
